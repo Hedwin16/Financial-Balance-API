@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Financial Balance API", "Fi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DB", "DB\DB.csproj", "{3A77315B-9081-4D8B-A949-78A695215917}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiRepository", "ApiRepository\ApiRepository.csproj", "{EFE5F5C9-4F92-4101-822C-30B71B24C2C1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{3A77315B-9081-4D8B-A949-78A695215917}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3A77315B-9081-4D8B-A949-78A695215917}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3A77315B-9081-4D8B-A949-78A695215917}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFE5F5C9-4F92-4101-822C-30B71B24C2C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFE5F5C9-4F92-4101-822C-30B71B24C2C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFE5F5C9-4F92-4101-822C-30B71B24C2C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFE5F5C9-4F92-4101-822C-30B71B24C2C1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

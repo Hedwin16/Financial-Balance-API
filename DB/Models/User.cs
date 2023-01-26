@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Financial_Balance_API.Models;
+namespace DB.Models;
 
 public partial class User
 {

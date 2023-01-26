@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Financial_Balance_API.Models;
+namespace DB.Models;
 
-public partial class UserPrivilege
+public partial class UserAccount
 {
     public int Id { get; set; }
 
     public int IdUser { get; set; }
 
-    public int IdPrivilege { get; set; }
+    public int IdAccount { get; set; }
 
-    public virtual Privilege IdPrivilegeNavigation { get; set; } = null!;
+    public virtual Account IdAccountNavigation { get; set; } = null!;
 
     public virtual User IdUserNavigation { get; set; } = null!;
 }

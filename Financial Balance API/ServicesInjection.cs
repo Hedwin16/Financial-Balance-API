@@ -1,4 +1,4 @@
-﻿using Financial_Balance_API.Models;
+﻿using DB.Models;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.EntityFrameworkCore;
 

@@ -1,4 +1,4 @@
-using Financial_Balance_API.Models;
+using DB.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Financial_Balance_API.Controllers
@@ -25,6 +25,8 @@ namespace Financial_Balance_API.Controllers
         [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {
+            var list = _context.Currencies.ToList();
+
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateTime.Now.AddDays(index),
