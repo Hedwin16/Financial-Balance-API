@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ApiRepository\ApiRepository.csproj" />
     <ProjectReference Include="..\DB\DB.csproj" />
   </ItemGroup>
 

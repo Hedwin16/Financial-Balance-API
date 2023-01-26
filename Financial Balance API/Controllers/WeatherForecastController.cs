@@ -1,3 +1,4 @@
+using ApiRepository.Interfaces;
 using DB.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,19 +14,21 @@ namespace Financial_Balance_API.Controllers
     };
 
         private readonly ApiContext _context;
+        private readonly IRepository<Currency> _repository;
 
         private readonly ILogger<WeatherForecastController> _logger;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger, ApiContext context)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, IRepository<Currency> repository)
         {
             _logger = logger;
-            _context= context;
+            _repository= repository;
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
-        public IEnumerable<WeatherForecast> Get()
+        public async Task<IEnumerable<WeatherForecast>> Get()
         {
-            var list = _context.Currencies.ToList();
+            
+            var data = await _repository.GetAll();
 
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {

@@ -5,11 +5,11 @@ using System.Linq.Expressions;
 
 namespace ApiRepository.Services;
 
-public class RepositoryAsync<T> : IRepository<T> where T : class
+public class Repository<T> : IRepository<T> where T : class
 {
     private readonly ApiContext context;
 
-    public RepositoryAsync(ApiContext context)
+    public Repository(ApiContext context)
     {
         this.context = context;
     }
