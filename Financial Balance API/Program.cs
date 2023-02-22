@@ -1,4 +1,5 @@
 using Financial_Balance_API;
+using Financial_Balance_API.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,7 +25,9 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+app.UseApiSettingsMiddleware();
 
 app.MapControllers();
+app.UseRouting();
 
 app.Run();

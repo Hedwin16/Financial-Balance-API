@@ -1,7 +1,6 @@
 ﻿using ApiRepository.Interfaces;
 using ApiRepository.Services;
 using DB.Models;
-using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.EntityFrameworkCore;
 
 namespace Financial_Balance_API;
@@ -12,6 +11,8 @@ public static class ServicesInjection
         IConfiguration configuration)
     {
         services.AddScoped<IRepository<Currency>, Repository<Currency>>();
+        services.AddScoped<IRepository<Privilege>, Repository<Privilege>>();
+        services.AddScoped<IRepository<User>, Repository<User>>();
 
         services.AddDbContext<ApiContext>(options =>
         {
