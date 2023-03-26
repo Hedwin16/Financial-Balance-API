@@ -28,3 +28,24 @@ X-Api-Key: {{standardKey}}
     "name" : "JHDS",
     "pass" : "123456"
 }
+
+### 
+# Delete user
+POST {{baseUrl}}/api/user_delete
+Content-Type: application/json
+X-Api-Key: {{apiKey}}
+
+{
+    "id": 7
+}
+
+### 
+# Login user
+POST {{baseUrl}}/api/user_login
+Content-Type: application/json
+X-Api-Key: {{apiKey}}
+
+{
+    "name" : "JHDS",
+    "pass" : "123456"
+}

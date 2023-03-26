@@ -11,6 +11,8 @@ public abstract class Result<T> : Result
 {
     private T _data;
 
+    private T _defaultEmptyData;
+
     protected Result(T data)
     {
         Data = data;
@@ -18,7 +20,10 @@ public abstract class Result<T> : Result
 
     public T Data
     {
-        get => Success ? _data : throw new Exception($"You can't access .{nameof(Data)} when .{nameof(Success)} is false");
+        get => Success 
+            ? _data 
+            : throw new Exception($"You can't access .{nameof(Data)} when .{nameof(Success)} is false");
+            //: _defaultEmptyData;
         set => _data = value;
     }
 }
@@ -39,9 +44,10 @@ public class SuccessResult : Result
 
 public class SuccessResult<T> : Result<T>
 {
-    public SuccessResult(T data) : base(data)
+    public SuccessResult(T data, string msg = "") : base(data)
     {
         Success = true;
+        Message = msg;
     }
 
     public static implicit operator SuccessResult(SuccessResult<T> successResult)

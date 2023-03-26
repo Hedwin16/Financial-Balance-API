@@ -1,5 +1,6 @@
 ﻿using ApiRepository.Interfaces;
 using DB.Models;
+using Financial_Balance_API.Attributes;
 using Financial_Balance_API.Common;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -38,7 +39,7 @@ public class UserController : Controller
                 return Unauthorized(result.Message);
             }
 
-            return Ok(result.Data);
+            return Ok(result.Message);
         }
         catch (Exception ex)
         {
@@ -73,5 +74,31 @@ public class UserController : Controller
         return Ok(result.Data);
     }
 
+    [AdminKey]
+    [HttpPost("api/user_delete")]
+    public async Task<IActionResult> DeleteUser([FromBody] User user)
+    {
+        var result = await _repository.DeleteUser(user);
+
+        if (! result.Success)
+        {
+            return BadRequest(result.Message);
+        }
+
+        return Ok(result.Message);
+    }
+
+    [HttpPost("api/user_login")]
+    public async Task<IActionResult> LoginUser([FromBody] User user)
+    {
+        var result = await _repository.Login(user);
+
+        if (! result.Success)
+        {
+            return BadRequest(result.Message);
+        }
+
+        return Ok(result.Data);
+    }
 
 }
