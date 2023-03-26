@@ -1,5 +1,6 @@
 ﻿using ApiRepository.Interfaces;
 using DB.Models;
+using DB.Models.Result;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
@@ -78,5 +79,35 @@ public class Repository<T> : IRepository<T> where T : class
     public async Task<T> Find(Expression<Func<T, bool>> expr)
     {
         return await EntitySet.AsNoTracking().FirstOrDefaultAsync(expr);
+    }
+
+    Task<Result<IEnumerable<T>>> IRepository<T>.GetAll()
+    {
+        throw new NotImplementedException();
+    }
+
+    Task<Result<T>> IRepository<T>.GetByID(int? id)
+    {
+        throw new NotImplementedException();
+    }
+
+    Task<Result<T>> IRepository<T>.Insert(T entity)
+    {
+        throw new NotImplementedException();
+    }
+
+    Task<Result<T>> IRepository<T>.Delete(int id)
+    {
+        throw new NotImplementedException();
+    }
+
+    Task<Result<T>> IRepository<T>.Update(T entity)
+    {
+        throw new NotImplementedException();
+    }
+
+    Task<Result<T>> IRepository<T>.Find(Expression<Func<T, bool>> expr)
+    {
+        throw new NotImplementedException();
     }
 }

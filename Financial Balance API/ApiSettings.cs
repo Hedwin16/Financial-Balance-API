@@ -3,7 +3,7 @@
 public class ApiSettings
 {
     public const string API_SETTINGS = "ApiSettings";
-    public const string CONNECTION_STRING = "ApiContext";
+    public const string CONNECTION_STRING= "ApiContext";
     public const string APIKEY = "X-Api-Key";
     public const string USER_NAME = "X-User";
 

@@ -1,0 +1,30 @@
+@baseUrl = https://localhost:7118
+@idPrivilege = 1
+@standardKey = my_api_key_standard
+@apiKey = my_api_key
+
+### Get all Users
+GET {{baseUrl}}/api/user
+
+### 
+# Add new user
+POST {{baseUrl}}/api/users_get_all
+Content-Type: application/json
+X-Api-Key: {{apiKey}}
+
+{
+    #"id" = 0,
+    #"name" = "Peter"
+}
+
+### 
+# Add new user
+POST {{baseUrl}}/api/saveuser/{{idPrivilege}}
+Content-Type: application/json
+X-Api-Key: {{standardKey}}
+
+{
+    "id" : 0,
+    "name" : "JHDS",
+    "pass" : "123456"
+}

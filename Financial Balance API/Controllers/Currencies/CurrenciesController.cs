@@ -1,5 +1,6 @@
 ﻿using ApiRepository.Interfaces;
 using DB.Models;
+using DB.Models.Result;
 using Financial_Balance_API.Attributes;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -12,12 +13,12 @@ namespace Financial_Balance_API.Controllers.Currencies
     public class CurrenciesController : Controller
     {
         private readonly ILogger _logger;
-        private readonly IRepository<Currency> _repository;
+        private readonly ICurrencyRepository _repository;
         private readonly ApiSettings _apiSettings;
         //private readonly RequestDelegate _next;
 
         public CurrenciesController(ILogger<CurrenciesController> logger,
-           IRepository<Currency> repository
+           ICurrencyRepository repository
            , IOptions<ApiSettings> options)
         {
             _logger = logger;
@@ -28,23 +29,30 @@ namespace Financial_Balance_API.Controllers.Currencies
         // POST: Currencies Get All
         //[AdminKey]
         [HttpPost("api/currencies_get_all")]
-        public async Task<IEnumerable<Currency>> GetAllCurrencies()
+        public async Task<IActionResult> GetAllCurrencies()
         {
-            var TypeClient = GetCurrentKeyType();
+            var TypeClient = GetCurrentKeyType(); // Abstract Method to Singleton
 
             if (TypeClient == KeyType.None)
             {
                 Response.StatusCode = 404;
-                return null;
+                return Unauthorized();
             }
 
-            if (TypeClient == KeyType.Standard)
+            //if (TypeClient == KeyType.Standard)
+            //{
+            //    Response.StatusCode = 404;
+            //    return null;
+            //}
+
+            var result = await _repository.GetAll();
+
+            if (! result.Success)
             {
-                Response.StatusCode = 404;
-                return null;
+                return NotFound(result.Message);
             }
 
-            return await _repository.GetAll();
+            return Ok(result.Data);
         }
 
         private KeyType GetCurrentKeyType()
@@ -98,73 +106,24 @@ namespace Financial_Balance_API.Controllers.Currencies
                 : Ok();
         }
 
-        //// GET: CurrenciesController/Details/5
-        //public ActionResult Details(int id)
-        //{
-        //    return View();
-        //}
+        [HttpGet("api/CurrencyId/{id}")]
+        public IActionResult GetCurrencyById(int id)
+        {
+            var result = _repository.GetByID(id);
 
-        //// GET: CurrenciesController/Create
-        //public ActionResult Create()
-        //{
-        //    return View();
-        //}
+            if (result is ErrorResult)
+            {
+                return BadRequest(result.Success);
+            }
 
-        //// POST: CurrenciesController/Create
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create(IFormCollection collection)
-        //{
-        //    try
-        //    {
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
+            if (result is ErrorResult<Currency>)
+            {
+                var msg = (ErrorResult<Currency>)result;
 
-        //// GET: CurrenciesController/Edit/5
-        //public ActionResult Edit(int id)
-        //{
-        //    return View();
-        //}
+                return BadRequest(result.Message);
+            }
 
-        //// POST: CurrenciesController/Edit/5
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit(int id, IFormCollection collection)
-        //{
-        //    try
-        //    {
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
-
-        //// GET: CurrenciesController/Delete/5
-        //public ActionResult Delete(int id)
-        //{
-        //    return View();
-        //}
-
-        //// POST: CurrenciesController/Delete/5
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Delete(int id, IFormCollection collection)
-        //{
-        //    try
-        //    {
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
+            return Ok(result.Data);
+        }
     }
 }

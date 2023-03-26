@@ -10,9 +10,11 @@ public static class ServicesInjection
     public static IServiceCollection AddServices(this IServiceCollection services,
         IConfiguration configuration)
     {
-        services.AddScoped<IRepository<Currency>, Repository<Currency>>();
+        services.AddScoped<IRepository<Currency>,Repository<Currency>>();
         services.AddScoped<IRepository<Privilege>, Repository<Privilege>>();
         services.AddScoped<IRepository<User>, Repository<User>>();
+        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<ICurrencyRepository, CurrencyRepository>();
 
         services.AddDbContext<ApiContext>(options =>
         {

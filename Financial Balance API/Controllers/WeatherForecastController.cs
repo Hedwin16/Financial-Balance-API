@@ -15,20 +15,35 @@ namespace Financial_Balance_API.Controllers
 
         private readonly ApiContext _context;
         private readonly IRepository<Currency> _repository;
+        private readonly IRepository<User> _repository1;
 
         private readonly ILogger<WeatherForecastController> _logger;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger, IRepository<Currency> repository)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger
+            , IRepository<Currency> repository
+            , IRepository<User> repository1)
         {
             _logger = logger;
             _repository= repository;
+            _repository1 = repository1;
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
         public async Task<IEnumerable<WeatherForecast>> Get()
         {
-            
-            var data = await _repository.GetAll();
+            var result = await _repository1.GetAll();
+
+            //if (result.Success)
+            //{
+            //    return null;
+            //}
+
+            //if (result.Data)
+            //{
+
+            //}
+
+            //var data = await _repository.GetAll();
 
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
